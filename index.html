@@ -744,7 +744,7 @@ const STORY = {
       type: "text",
       content: `You are about to experience an interactive film project called SECOND NATURE.\n\nThe different narrative pathways have been created by a group of 10 young people from Nottinghamshire, and written by Martha Reed. This is a work-in-progress, sharing the story set up and the first few minutes of content.\n\nWhen you are prompted to make a decision for the character, please click on one of the options that appear.\n\nMaking these experiences rely on funding and support - your feedback at this stage will help us in securing the next phase of development.Please complete the form by scanning the QR code at the end of the experience.`,
       choices: [
-        { label: "Next", next: "prologue" },
+        { label: "Start", next: "prologue" },
       ]
     },
 	
@@ -752,7 +752,7 @@ const STORY = {
       type: "text",
       content: `You are a fellow survivor in the year 2051. The planet has reached boiling point. The ruling class are the only ones who are comfortable.\n\nIn this world, when people die, their knowledge and experiences are uploaded into the MYCELIUM NETWORK.\n\nWork together to help Ash in the start of their journey in uncovering their mum’s legacy.`,
       choices: [
-        { label: "START", next: "act1scene1" },
+        { label: "Run", next: "act1scene1" }
       ]
     },
 
@@ -789,10 +789,10 @@ const STORY = {
 
     structure: {
       type: "text",
-      content: `Inside: a former water treatment plant, repurposed. The machinery is gone. What remains are hundreds of sample jars — soil, water, air — each carefully labelled by hand. A field laboratory.\n\nIn the corner, a cot. A solar array, small and scarred. Evidence of months of habitation.\n\nOn the main workbench: a report, handwritten. The title reads:\n\n*"On the Deliberate Acceleration of Ecosystem Collapse for Capital Extraction — A Primary Source Account."*\n\nThe signature at the bottom is that of Dr. Yara Fendt. The lead scientist Aerion publicly blamed for the Sector 9 disaster before she disappeared in 2074.`,
+      content: `Inside: a resistance safe post in the forest`,
       choices: [
-        { label: "Take the report and the sample data", next: "ending_evidence" },
-        { label: "Stay and search for Dr. Fendt", next: "ending_fendt" }
+        { label: "Choice 1", next: "ending_evidence" },
+        { label: "Choice 2", next: "ending_fendt" }
       ]
     },
 
