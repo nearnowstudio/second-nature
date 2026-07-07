@@ -752,48 +752,86 @@ const STORY = {
       type: "text",
       content: `You are a fellow survivor in the year 2051. The planet has reached boiling point. The ruling class are the only ones who are comfortable.\n\nIn this world, when people die, their knowledge and experiences are uploaded into the MYCELIUM NETWORK.\n\nWork together to help Ash in the start of their journey in uncovering their mum’s legacy.`,
       choices: [
-        { label: "Run", next: "act1scene1" }
+        { label: "Help Ash", next: "act1scene1" }
       ]
     },
 
     act1scene1: {
       type: "video",
       content: `Text content add here`,
-      video: "https://www.dropbox.com/scl/fi/ca30ltdw3pqtar7emhcri/ACT-1-SCENE-1-captions.mov?rlkey=og9niw48cxd3pibd1onaxs6hb&st=d5f25auc&e=1&dl=1%7C1%3A06",
-      videoLabel: "FEED_09 // Forest — Year 2051",
+      video: "https://www.dropbox.com/scl/fi/ca30ltdw3pqtar7emhcri/ACT-1-SCENE-1-captions.mov",
+      videoLabel: "FEED_00 // Forest — Year 2051",
       choices: [
-        { label: "FIGHT", next: "structure" },
-        { label: "FLEE", next: "perimeter" }
+        { label: "FIGHT", next: "option1" },
+        { label: "FLEE", next: "option2" }
       ]
     },
 
-    decrypt: {
-      type: "text",
-      content: `The decryption takes eleven minutes. What surfaces is worse than you expected.\n\nAerion's internal models — running since 2068 — show they *knew*. The atmospheric projections. The cascade point for the northern permafrost. The methane figures. All of it was modelled, verified, archived — and then reclassified as *proprietary risk assessment*.\n\nThere is a second file. A list of names. Scientists. Journalists. Legislators. All of them discredited, disappeared, or bought.\n\nAt the bottom of the list: *your handler's name. Status: ASSET.*\n\nYou have been fed here deliberately.`,
+    option1: {
+      type: "video",
+      content: `Option1 text here`,
+	  video: "https://www.dropbox.com/scl/fi/ca30ltdw3pqtar7emhcri/ACT-1-SCENE-1-captions.mov",
+      videoLabel: "FEED_01 // Option1",
       choices: [
-        { label: "Continue east anyway — the evidence is worth the risk", next: "act1scene1" },
-        { label: "Go dark and reroute to the backup archive", next: "reroute" }
+        { label: "Befriend Bird", next: "option1a" },
+        { label: "Kill Bird", next: "option1b" }
       ]
     },
 
-    structure: {
-      type: "text",
+    option1a: {
+      type: "video",
       content: `Inside: a resistance safe post in the forest`,
+	  video: "https://www.dropbox.com/scl/fi/ca30ltdw3pqtar7emhcri/ACT-1-SCENE-1-captions.mov",
+      videoLabel: "FEED_02 // Option1a",
       choices: [
-        { label: "Choice 1", next: "ending_evidence" },
-        { label: "Choice 2", next: "ending_fendt" }
+        { label: "Credits", next: "credits" }
       ]
     },
 	
-    ending_flee: {
-      type: "text",
-      content: `You run northeast, through the dead salt flats, abandoning your equipment. The drone finds your heat signature within minutes but you are already inside the interference zone around the old industrial district — Aerion's own signal-dampening infrastructure, turned against them.\n\nYou make it to a transit node. You get out.\n\nBut the coordinates are still out there. And someone else received them before the mesh collapsed.\n\nSomewhere in the grey world, someone is walking toward Sector 9-Delta.\n\n*The archive does not die with any one person.*`,
-      choices: []
+    option1b: {
+      type: "video",
+      content: `Text content here`,
+	  video: "https://www.dropbox.com/scl/fi/ca30ltdw3pqtar7emhcri/ACT-1-SCENE-1-captions.mov",
+      videoLabel: "FEED_03 // Option1b",
+      choices: [
+        { label: "Keep Bird", next: "option1bi" },
+		{ label: "Bury Bird", next: "option1bii" }
+      ]
     },
 
-    ending_observe: {
+    option1bi: {
+      type: "video",
+      content: `Text content here`,
+	  video: "https://www.dropbox.com/scl/fi/ca30ltdw3pqtar7emhcri/ACT-1-SCENE-1-captions.mov",
+      videoLabel: "FEED_04 // Option1Bi",
+      choices: [
+        { label: "Credits", next: "credits" }
+      ]
+    },
+	
+    option1bii: {
+      type: "video",
+      content: `Text content here`,
+	  video: "https://www.dropbox.com/scl/fi/ca30ltdw3pqtar7emhcri/ACT-1-SCENE-1-captions.mov",
+      videoLabel: "FEED_05 // Option1Bii",
+      choices: [
+        { label: "Credits", next: "credits" }
+      ]
+    },
+
+    option2: {
+      type: "video",
+      content: `Text content here`,
+	  video: "https://www.dropbox.com/scl/fi/ca30ltdw3pqtar7emhcri/ACT-1-SCENE-1-captions.mov",
+      videoLabel: "FEED_04 // Option2",
+      choices: [
+        { label: "Credits", next: "credits" }
+      ]
+    },
+
+	credits: {
       type: "text",
-      content: `You wait. Two hours pass.\n\nA second figure arrives at the structure from the south — on foot, careful, scanning. They enter. Lights come on inside, briefly. Then go dark again.\n\nThey emerge carrying something. A case. They move with purpose, heading northwest — toward the surviving grid.\n\nYou never see their face. You do not know what they found.\n\nBut you record everything: the drone patterns, the structure, the figure, the direction. You transmit it to the Archive in fragments, spread across six hours.\n\nSometimes the most important thing a witness can do is *stay alive long enough to tell someone.*`,
+      content: `Created by Mind Out Arts Second Nature Focus Group\nWritten by Martha Reed\nDirected by Evie Osbon\nDigital Artist Joe Strickland\nPerformed by Michelle Kelly\nDesigner & Puppetry Consultant Nikki Charlesworth\nDigital Consultant - Paula Varjack & Nathan Penlington\nFreelance Environmental Consultant - Talie Smith\nArtist Wellbeing Practitioner - Nikki Disney\nStrategic Producer - Phoebe Wall-Palmer\nProducer - Evie Osbon\nAssistant Producer - Simrun Sandhu\nAssistant Facilitators - Ruby Mucenieks, Anna Cooke, Octavia Nyombi, Sarah Hailstones\nMind Out Arts Second Nature Focus Group - Albrena, Astelina, Bethan,Eliza, Jack, Juliet, Rae, Rowen-Lilja, Tintin\n\nThank you to our partners, Broadway Cinema, Unanima, Bulwell Forest Gardens, GrowNotts, the Toy Library for usage of Barkers Wood for filming, NTU Design for Theatre, Film and TV for use of their space for set building and construction, props, and for providing the original base of the set we repurposed, and Arts Council England.`,
       choices: []
     }
   }
