@@ -744,7 +744,7 @@ const STORY = {
       type: "text",
       content: `You are about to experience an interactive film project called SECOND NATURE.\n\nThe different narrative pathways have been created by a group of 10 young people from Nottinghamshire, and written by Martha Reed. This is a work-in-progress, sharing the story set up and the first few minutes of content.\n\nWhen you are prompted to make a decision for the character, please click on one of the options that appear.\n\nMaking these experiences rely on funding and support - your feedback at this stage will help us in securing the next phase of development.Please complete the form by scanning the QR code at the end of the experience.`,
       choices: [
-        { label: "Start", next: "prologue" },
+        { label: "Start", next: "prologue" }
       ]
     },
 	
@@ -776,17 +776,6 @@ const STORY = {
       ]
     },
 
-    broadcast: {
-      type: "video",
-      content: `You push the coordinates to every node in the Archive mesh. For forty seconds, the signal travels.\n\nThen Aerion's countermeasures hit. The mesh collapses, node by node — each one a person somewhere in a shelter, a basement, a converted shipping container.\n\nYou watch the network map go dark in real time.\n\nYou are alone in the signal now. But somewhere in the noise before the blackout, someone sent two words back:\n\n*"We know."*`,
-      video: "https://www.w3schools.com/html/movie.mp4",
-      videoLabel: "FEED_11 // Signal collapse — Archive mesh failure",
-      choices: [
-        { label: "Trace the source of those two words", next: "act1scene1" },
-        { label: "Run. They know your position now.", next: "ending_flee" }
-      ]
-    },
-
     structure: {
       type: "text",
       content: `Inside: a resistance safe post in the forest`,
@@ -795,41 +784,7 @@ const STORY = {
         { label: "Choice 2", next: "ending_fendt" }
       ]
     },
-
-    perimeter: {
-      type: "text",
-      content: `Smart move.\n\nYour scanner picks up a surveillance drone — Aerion-model, second generation — running a sweep pattern from the north. It hasn't seen you yet.\n\nBehind you: the cracked mud of the estuary. Ahead: the structure. Between you and it, forty metres of open ground.\n\nThe drone completes its sweep. There will be a ninety-second window.`,
-      choices: [
-        { label: "Sprint for the structure during the window", next: "structure" },
-        { label: "Stay concealed and observe longer", next: "ending_observe" }
-      ]
-    },
-
-    reroute: {
-      type: "video",
-      content: `You go dark. Physical movement only. The backup archive is a repurposed water tower, four kilometres north, run by a collective of ex-ecologists and a former Aerion compliance officer who found her conscience too late — or perhaps, just in time.\n\nThey receive the data. They verify it. They begin the process of distributed redundancy — encoding the evidence into seventeen formats, scattering it across physical and digital systems Aerion cannot easily reach.\n\nIt is slow. It is unglamorous. It is how truth survives.`,
-      video: "https://www.w3schools.com/html/mov_bbb.mp4",
-      videoLabel: "FEED_14 // Archive collective — backup node",
-      choices: [
-        { label: "Stay and help encode the full evidence package", next: "ending_evidence" },
-        { label: "Go back for what is still in Sector 9-Delta", next: "structure" }
-      ]
-    },
-
-    ending_evidence: {
-      type: "text",
-      content: `The data reaches seventeen simultaneous publication nodes at 06:44.\n\nAerion's legal response comes within the hour. But it is too late — the information is not in any one place. It cannot be contained. It cannot be reclassified.\n\nThe report by Dr. Yara Fendt — *three hundred and twelve pages of primary source evidence* — begins to move through the surviving networks of the world.\n\nIt will not fix what was broken. The estuary will not return. The ice will not refreeze. The dead zones will not bloom again in any of our lifetimes.\n\nBut the lie, at last, is over.\n\n*What we do with the truth is the only question left.*`,
-      choices: []
-    },
-
-    ending_fendt: {
-      type: "video",
-      content: `You find her three kilometres deeper into the sector, in a second structure — a decommissioned seed vault, its climate systems still barely running on salvaged solar.\n\nDr. Fendt is alive. Sixty-one years old. She has been documenting, alone, for fifteen years.\n\nShe looks at you for a long moment.\n\n*"I wondered how long it would take,"* she says. *"I have everything. I've been waiting for someone who could carry it out."*\n\nShe hands you a drive. Its casing is worn smooth from years of being held.\n\n*The weight of it is extraordinary.*`,
-      video: "https://www.w3schools.com/html/movie.mp4",
-      videoLabel: "FEED_22 // Contact confirmed — Dr. Yara Fendt, Sector 9",
-      choices: []
-    },
-
+	
     ending_flee: {
       type: "text",
       content: `You run northeast, through the dead salt flats, abandoning your equipment. The drone finds your heat signature within minutes but you are already inside the interference zone around the old industrial district — Aerion's own signal-dampening infrastructure, turned against them.\n\nYou make it to a transit node. You get out.\n\nBut the coordinates are still out there. And someone else received them before the mesh collapsed.\n\nSomewhere in the grey world, someone is walking toward Sector 9-Delta.\n\n*The archive does not die with any one person.*`,
