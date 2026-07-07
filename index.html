@@ -693,14 +693,14 @@ footer {
 
 <header>
   <div class="hud-corner">
-    UNIT_ID: ARC-7<br>
-    LOC: SECTOR 9-DELTA<br>
+    UNIT_ID: ASH<br>
+    LOC: FOREST<br>
     ATMO: <span style="color:var(--rust)">TOXIC</span><br>
     <span class="blink">▮</span> TRANSMITTING
   </div>
   <div class="header-center">
     <h1 class="story-title" data-text=“SECOND NATURE”>SECOND NATURE</h1>
-    <p class="story-subtitle">classified transmission &nbsp;/&nbsp; year 2089</p>
+    <p class="story-subtitle">classified transmission &nbsp;/&nbsp; year 2051</p>
   </div>
   <div class="hud-corner" style="text-align:right">
     O2: <span style="color:var(--acid)">12.4%</span><br>
@@ -714,7 +714,7 @@ footer {
   <div class="status-item"><div class="status-dot"></div>NARRATIVE STREAM ACTIVE</div>
   <div class="status-item"><div class="status-dot yellow"></div>BIOSPHERE: CRITICAL</div>
   <div class="status-item"><div class="status-dot red"></div>CORP SURVEILLANCE DETECTED</div>
-  <div class="ticker">ALERT: OCEANIC DEAD ZONES EXPANDING &nbsp;·&nbsp; ARCTIC SHELF COLLAPSE: DAY 847 &nbsp;·&nbsp; AERION CORP DENIES VENT BREACH &nbsp;·&nbsp; REFUGEE COUNT: 2.4BN &nbsp;·&nbsp; LAST FOREST RESERVE: SEALED &nbsp;·&nbsp;</div>
+  <div class="ticker">ALERT: CLEAN WATER SCARCE &nbsp;·&nbsp; DAYS SINCE FLOOD: 4 &nbsp;·&nbsp; MYCELIUM NETWORK STATUS: ONLINE &nbsp;·&nbsp; SEEDS PLANTED: 2.4BN &nbsp;·&nbsp;</div>
 </div>
 
 <main>
@@ -723,10 +723,10 @@ footer {
 </main>
 
 <footer>
-  <div class="footer-left">SECOND NATURE &nbsp;·&nbsp; STORY ENGINE TEST &nbsp;·&nbsp; 2089</div>
+  <div class="footer-left">SECOND NATURE &nbsp;·&nbsp; STORY ENGINE TEST &nbsp;·&nbsp; 2051</div>
   <div class="footer-right">
     <div class="status-dot" style="width:4px;height:4px"></div>
-    YOUR CHOICES SHAPE THE ARCHIVE
+    YOUR CHOICES SHAPE THE OUTCOME
   </div>
 </footer>
 
@@ -742,22 +742,28 @@ const STORY = {
 
     intro: {
       type: "text",
-      content: `The data spike woke you at 03:17 — an anomaly buried inside Aerion Corporation's encrypted waste-flow logs. Coordinates. A grid reference no official map still carries.\n\nYou are a field operative for the Remnant Archive: the last network of humans documenting what was done to the world before the Accord silenced the press.\n\nOutside your shelter, the sky is the colour of a bruise. The air scrubber blinks red. Somewhere to the east, across the dead estuary, something is still burning.\n\nThe coordinates point to *Sector 9-Delta* — the site of the 2071 Controlled Collapse. They told the world it was contained. The data says otherwise.`,
+      content: `You are about to experience an interactive film project called SECOND NATURE.\n\nThe different narrative pathways have been created by a group of 10 young people from Nottinghamshire, and written by Martha Reed. This is a work-in-progress, sharing the story set up and the first few minutes of content.\n\nWhen you are prompted to make a decision for the character, please click on one of the options that appear.\n\nMaking these experiences rely on funding and support - your feedback at this stage will help us in securing the next phase of development.Please complete the form by scanning the QR code at the end of the experience.`,
       choices: [
-        { label: "Move east toward the estuary crossing", next: "estuary" },
-        { label: "Decrypt the full data package first", next: "decrypt" },
-        { label: "Broadcast the coordinates to the Archive network", next: "broadcast" }
+        { label: "Next", next: "forest" },
+      ]
+    },
+	
+	prologue: {
+      type: "text",
+      content: `You are a fellow survivor in the year 2051. The planet has reached boiling point. The ruling class are the only ones who are comfortable.\n\nIn this world, when people die, their knowledge and experiences are uploaded into the MYCELIUM NETWORK.\n\nWork together to help Ash in the start of their journey in uncovering their mum’s legacy.`,
+      choices: [
+        { label: "START", next: "act1scene1" },
       ]
     },
 
-    estuary: {
+    act1scene1: {
       type: "video",
-      content: `The estuary is vast and still. What was once a river delta — a living system of reed beds, wading birds, sediment and salt — is now a grey plain of cracked silt. The waterline is marked in strata on the rusted bridge supports: each band a year, climbing upward, then receding into nothing.\n\nYour suit sensors flag the soil. *Polyfluoroalkyl compounds. Persistent. Half-life: centuries.*\n\nOn the far bank, a structure. Pre-collapse industrial. Someone has recently been inside.`,
-      video: "https://www.w3schools.com/html/mov_bbb.mp4",
-      videoLabel: "FEED_09 // Estuary crossing — Year 2089",
+      content: `Text content add here`,
+      video: "https://www.dropbox.com/scl/fi/ca30ltdw3pqtar7emhcri/ACT-1-SCENE-1-captions.mov?rlkey=og9niw48cxd3pibd1onaxs6hb&st=d5f25auc&e=1&dl=1%7C1%3A06",
+      videoLabel: "FEED_09 // Forest — Year 2051",
       choices: [
-        { label: "Approach the structure", next: "structure" },
-        { label: "Scan the perimeter before moving", next: "perimeter" }
+        { label: "FIGHT", next: "structure" },
+        { label: "FLEE", next: "perimeter" }
       ]
     },
 
@@ -765,7 +771,7 @@ const STORY = {
       type: "text",
       content: `The decryption takes eleven minutes. What surfaces is worse than you expected.\n\nAerion's internal models — running since 2068 — show they *knew*. The atmospheric projections. The cascade point for the northern permafrost. The methane figures. All of it was modelled, verified, archived — and then reclassified as *proprietary risk assessment*.\n\nThere is a second file. A list of names. Scientists. Journalists. Legislators. All of them discredited, disappeared, or bought.\n\nAt the bottom of the list: *your handler's name. Status: ASSET.*\n\nYou have been fed here deliberately.`,
       choices: [
-        { label: "Continue east anyway — the evidence is worth the risk", next: "estuary" },
+        { label: "Continue east anyway — the evidence is worth the risk", next: "act1scene1" },
         { label: "Go dark and reroute to the backup archive", next: "reroute" }
       ]
     },
@@ -776,7 +782,7 @@ const STORY = {
       video: "https://www.w3schools.com/html/movie.mp4",
       videoLabel: "FEED_11 // Signal collapse — Archive mesh failure",
       choices: [
-        { label: "Trace the source of those two words", next: "estuary" },
+        { label: "Trace the source of those two words", next: "act1scene1" },
         { label: "Run. They know your position now.", next: "ending_flee" }
       ]
     },
