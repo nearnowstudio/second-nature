@@ -732,7 +732,7 @@ footer {
 
 <script>
 // ═══════════════════════════════════════════════════
-//  STORY DATA — Edit this to build your own story
+//  STORY DATA — Edit this build the story paths
 // ═══════════════════════════════════════════════════
 
 const STORY = {
@@ -932,8 +932,8 @@ function showEnding() {
   endEl.className = 'story-end';
   endEl.innerHTML = `
     <h2>Signal Lost</h2>
-    <p>This thread of the archive has reached its end. Other paths remain unwalked. The truth takes many routes to reach the light.</p>
-    <button class="restart-btn" onclick="restartStory()">Reinitialise Transmission</button>`;
+    <p>This story has reached its end. Other paths remain unwalked.</p>
+    <button class="restart-btn" onclick="restartStory()">Restart Transmission</button>`;
   chatLog.appendChild(endEl);
   endEl.scrollIntoView({ behavior: 'smooth', block: 'end' });
 }
