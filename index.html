@@ -137,7 +137,7 @@ header {
 
 .hud-corner {
   font-family: var(--font-hud);
-  font-size: 0.62rem;
+  font-size: 0.8rem;
   color: var(--text-dim);
   line-height: 1.8;
   letter-spacing: 0.05em;
@@ -170,7 +170,7 @@ header {
 
 .story-subtitle {
   font-family: var(--font-hud);
-  font-size: 0.65rem;
+  font-size: 0.8rem;
   color: var(--text-dim);
   letter-spacing: 0.4em;
   text-transform: uppercase;
@@ -187,8 +187,8 @@ header {
   background: var(--surface);
   border-bottom: 1px solid var(--toxic-border);
   font-family: var(--font-hud);
-  font-size: 0.6rem;
-  color: var(--text-faint);
+  font-size: 0.8rem;
+  color: var(--text);
   letter-spacing: 0.12em;
   overflow: hidden;
 }
@@ -222,11 +222,11 @@ header {
 
 .ticker {
   margin-left: auto;
-  color: var(--text-faint);
-  font-size: 0.58rem;
+  color: var(--text-dim);
+  font-size: 0.8rem;
   letter-spacing: 0.08em;
   white-space: nowrap;
-  animation: ticker-scroll 30s linear infinite;
+  animation: ticker-scroll 20s linear infinite;
 }
 
 @keyframes ticker-scroll {
@@ -627,16 +627,16 @@ footer {
 
 .footer-left {
   font-family: var(--font-hud);
-  font-size: 0.6rem;
+  font-size: 0.8rem;
   letter-spacing: 0.2em;
-  color: var(--text-faint);
+  color: var(--text-dim);
 }
 
 .footer-right {
   font-family: var(--font-hud);
-  font-size: 0.6rem;
+  font-size: 0.8rem;
   letter-spacing: 0.15em;
-  color: var(--text-faint);
+  color: var(--text-dim);
   display: flex;
   align-items: center;
   gap: 0.6rem;
@@ -711,9 +711,9 @@ footer {
 </header>
 
 <div class="status-bar">
-  <div class="status-item"><div class="status-dot"></div>NARRATIVE STREAM ACTIVE</div>
+  <!-- // <div class="status-item"><div class="status-dot"></div>NARRATIVE STREAM ACTIVE</div>
   <div class="status-item"><div class="status-dot yellow"></div>BIOSPHERE: CRITICAL</div>
-  <div class="status-item"><div class="status-dot red"></div>CORP SURVEILLANCE DETECTED</div>
+  <div class="status-item"><div class="status-dot red"></div>CORP SURVEILLANCE DETECTED</div> // -->
   <div class="ticker">ALERT: CLEAN WATER SCARCE &nbsp;·&nbsp; DAYS SINCE FLOOD: 4 &nbsp;·&nbsp; MYCELIUM NETWORK STATUS: ONLINE &nbsp;·&nbsp; SEEDS PLANTED: 2.4BN &nbsp;·&nbsp;</div>
 </div>
 
@@ -723,7 +723,7 @@ footer {
 </main>
 
 <footer>
-  <div class="footer-left">SECOND NATURE &nbsp;·&nbsp; STORY ENGINE TEST &nbsp;·&nbsp; 2051</div>
+  <div class="footer-left">SECOND NATURE &nbsp;·&nbsp; MIND OUT THEATRE &nbsp;·&nbsp; 2026</div>
   <div class="footer-right">
     <div class="status-dot" style="width:4px;height:4px"></div>
     YOUR CHOICES SHAPE THE OUTCOME
@@ -742,7 +742,7 @@ const STORY = {
 
     intro: {
       type: "text",
-      content: `You are about to experience an interactive film project called SECOND NATURE.\n\nThe different narrative pathways have been created by a group of 10 young people from Nottinghamshire, and written by Martha Reed. This is a work-in-progress, sharing the story set up and the first few minutes of content.\n\nWhen you are prompted to make a decision for the character, please click on one of the options that appear.\n\nMaking these experiences rely on funding and support - your feedback at this stage will help us in securing the next phase of development.Please complete the form by scanning the QR code at the end of the experience.`,
+      content: `You are about to experience an interactive film project called SECOND NATURE.\n\nThe different narrative pathways have been created by a group of 10 young people from Nottinghamshire, and written by Martha Reed. This is a work-in-progress, sharing the story set up and the first few minutes of content.\n\nWhen you are prompted to make a decision for the character, please click on one of the options that appear.\n\nMaking these experiences rely on funding and support - your feedback at this stage will help us in securing the next phase of development. Please complete the form by scanning the QR code at the end of the experience.`,
       choices: [
         { label: "Start", next: "prologue" }
       ]
@@ -758,8 +758,8 @@ const STORY = {
 
     act1scene1: {
       type: "video",
-      content: `Text content add here`,
-      video: "https://www.dropbox.com/scl/fi/ca30ltdw3pqtar7emhcri/ACT-1-SCENE-1-captions.mov",
+      content: `You have chosen to <i>HELP ASH</i>.`,
+      video: "https://www.dropbox.com/scl/fi/ca30ltdw3pqtar7emhcri/ACT-1-SCENE-1-captions.mov?rlkey=og9niw48cxd3pibd1onaxs6hb&st=gjpczjmy&raw=1",
       videoLabel: "FEED_00 // Forest — Year 2051",
       choices: [
         { label: "FIGHT", next: "option1" },
@@ -769,9 +769,9 @@ const STORY = {
 
     option1: {
       type: "video",
-      content: `Option1 text here`,
-	  video: "https://www.dropbox.com/scl/fi/ca30ltdw3pqtar7emhcri/ACT-1-SCENE-1-captions.mov",
-      videoLabel: "FEED_01 // Option1",
+      content: `You have chosen to <i>FIGHT</i>.`,
+	  video: "https://www.dropbox.com/scl/fi/estt2yw8br9y4mvrgkki5/OPTION-1.mov?rlkey=hxy7nq8jmkzgsbsdoa05d7ycb&st=dzh5z187&raw=1",
+      videoLabel: "FEED_01 // FIGHT",
       choices: [
         { label: "Befriend Bird", next: "option1a" },
         { label: "Kill Bird", next: "option1b" }
@@ -780,9 +780,9 @@ const STORY = {
 
     option1a: {
       type: "video",
-      content: `Inside: a resistance safe post in the forest`,
-	  video: "https://www.dropbox.com/scl/fi/ca30ltdw3pqtar7emhcri/ACT-1-SCENE-1-captions.mov",
-      videoLabel: "FEED_02 // Option1a",
+      content: `You have chosen to <i>BEFRIEND BIRD</i>.`,
+	  video: "https://www.dropbox.com/scl/fi/56fg77yads36b07gsj9iq/Option-1A-captions-reverb.mov?rlkey=d8j5qoqq1bcgb51yypkkoifue&st=pvbds85j&raw=1",
+      videoLabel: "FEED_02 // BEFRIEND",
       choices: [
         { label: "Credits", next: "credits" }
       ]
@@ -790,9 +790,9 @@ const STORY = {
 	
     option1b: {
       type: "video",
-      content: `Text content here`,
-	  video: "https://www.dropbox.com/scl/fi/ca30ltdw3pqtar7emhcri/ACT-1-SCENE-1-captions.mov",
-      videoLabel: "FEED_03 // Option1b",
+      content: `You have chosen to <i>KILL BIRD</i>.`,
+	  video: "https://www.dropbox.com/scl/fi/heeg4nx1yfvgtz16iv0x4/Option-1B-captions-reverb.mov?rlkey=91xsricvzc390tzmxzo7a7ybt&st=dko8zwrw&raw=1",
+      videoLabel: "FEED_03 // KILL",
       choices: [
         { label: "Keep Bird", next: "option1bi" },
 		{ label: "Bury Bird", next: "option1bii" }
@@ -801,9 +801,9 @@ const STORY = {
 
     option1bi: {
       type: "video",
-      content: `Text content here`,
-	  video: "https://www.dropbox.com/scl/fi/ca30ltdw3pqtar7emhcri/ACT-1-SCENE-1-captions.mov",
-      videoLabel: "FEED_04 // Option1Bi",
+      content: `You have chosen to <i>KEEP BIRD</i>.`,
+	  video: "https://www.dropbox.com/scl/fi/altjhymlsko0hnja79mtk/Option-1bi-captions-reverb.mov?rlkey=09qf1esl22zqoxvonccwiu8eg&st=4yortd8o&raw=1",
+      videoLabel: "FEED_04 // KEEP",
       choices: [
         { label: "Credits", next: "credits" }
       ]
@@ -811,9 +811,9 @@ const STORY = {
 	
     option1bii: {
       type: "video",
-      content: `Text content here`,
-	  video: "https://www.dropbox.com/scl/fi/ca30ltdw3pqtar7emhcri/ACT-1-SCENE-1-captions.mov",
-      videoLabel: "FEED_05 // Option1Bii",
+      content: `You have chosen to <i>BURY BIRD</i>.`,
+	  video: "https://www.dropbox.com/scl/fi/8i4gmds99os5e7w5f8wnt/Option-1bii-captions-reverb.mov?rlkey=6lc39q9f4tnmpytjbmh002tvw&st=yhcqzm2w&raw=1",
+      videoLabel: "FEED_05 // BURY",
       choices: [
         { label: "Credits", next: "credits" }
       ]
@@ -821,9 +821,9 @@ const STORY = {
 
     option2: {
       type: "video",
-      content: `Text content here`,
-	  video: "https://www.dropbox.com/scl/fi/ca30ltdw3pqtar7emhcri/ACT-1-SCENE-1-captions.mov",
-      videoLabel: "FEED_04 // Option2",
+      content: `You have chosen to <i>FLEE</i>.`,
+	  video: "https://www.dropbox.com/scl/fi/pntjkwx2xqlj8dozqy4f0/Option-2-captions-reverb.mov?rlkey=2gpo37wjsf339k9qbq7p54503&st=ahxbj8cy&raw=1",
+      videoLabel: "FEED_04 // FLEE",
       choices: [
         { label: "Credits", next: "credits" }
       ]
@@ -831,7 +831,7 @@ const STORY = {
 
 	credits: {
       type: "text",
-      content: `Created by Mind Out Arts Second Nature Focus Group\nWritten by Martha Reed\nDirected by Evie Osbon\nDigital Artist Joe Strickland\nPerformed by Michelle Kelly\nDesigner & Puppetry Consultant Nikki Charlesworth\nDigital Consultant - Paula Varjack & Nathan Penlington\nFreelance Environmental Consultant - Talie Smith\nArtist Wellbeing Practitioner - Nikki Disney\nStrategic Producer - Phoebe Wall-Palmer\nProducer - Evie Osbon\nAssistant Producer - Simrun Sandhu\nAssistant Facilitators - Ruby Mucenieks, Anna Cooke, Octavia Nyombi, Sarah Hailstones\nMind Out Arts Second Nature Focus Group - Albrena, Astelina, Bethan,Eliza, Jack, Juliet, Rae, Rowen-Lilja, Tintin\n\nThank you to our partners, Broadway Cinema, Unanima, Bulwell Forest Gardens, GrowNotts, the Toy Library for usage of Barkers Wood for filming, NTU Design for Theatre, Film and TV for use of their space for set building and construction, props, and for providing the original base of the set we repurposed, and Arts Council England.`,
+      content: `Created by Mind Out Arts Second Nature Focus Group\nWritten by Martha Reed\nDirected by Evie Osbon\nPerformed by Michelle Kelly\nDigital Artist - Joe Strickland\nDesigner & Puppetry Consultant - Nikki Charlesworth\nDigital Consultant - Paula Varjack & Nathan Penlington\nFreelance Environmental Consultant - Talie Smith\nArtist Wellbeing Practitioner - Nikki Disney\nStrategic Producer - Phoebe Wall-Palmer\nProducer - Evie Osbon\nAssistant Producer - Simrun Sandhu\nAssistant Facilitators - Ruby Mucenieks, Anna Cooke, Octavia Nyombi, Sarah Hailstones\nMind Out Arts Second Nature Focus Group - Albrena, Astelina, Bethan,Eliza, Jack, Juliet, Rae, Rowen-Lilja, Tintin\nWebsite design and interactive story engine - Near Now nearnow.org.uk\n\nThank you to our partners, Broadway Cinema, Near Now, Unanima, Bulwell Forest Gardens, GrowNotts, the Toy Library for usage of Barkers Wood for filming, NTU Design for Theatre, Film and TV for use of their space for set building and construction, props, and for providing the original base of the set we repurposed.\n\nSupported using public funding by the National Lottery through Arts Council England.`,
       choices: []
     }
   }
