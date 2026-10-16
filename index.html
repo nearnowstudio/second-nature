@@ -723,7 +723,7 @@ footer {
 </main>
 
 <footer>
-  <div class="footer-left">SECOND NATURE &nbsp;·&nbsp; MIND OUT THEATRE &nbsp;·&nbsp; 2026</div>
+  <div class="footer-left">SECOND NATURE&#169; MIND OUT THEATRE 2026 &nbsp;·&nbsp; WEBSITE &amp; STORY ENGINE&#169; LICENSED BY NEAR NOW 2026</div>
   <div class="footer-right">
     <div class="status-dot" style="width:4px;height:4px"></div>
     YOUR CHOICES SHAPE THE OUTCOME
@@ -831,7 +831,8 @@ const STORY = {
 
 	credits: {
       type: "text",
-      content: `Created by Mind Out Arts Second Nature Focus Group\nWritten by Martha Reed\nDirected by Evie Osbon\nPerformed by Michelle Kelly\nDigital Artist - Joe Strickland\nDesigner & Puppetry Consultant - Nikki Charlesworth\nDigital Consultant - Paula Varjack & Nathan Penlington\nFreelance Environmental Consultant - Talie Smith\nArtist Wellbeing Practitioner - Nikki Disney\nStrategic Producer - Phoebe Wall-Palmer\nProducer - Evie Osbon\nAssistant Producer - Simrun Sandhu\nAssistant Facilitators - Ruby Mucenieks, Anna Cooke, Octavia Nyombi, Sarah Hailstones\nMind Out Arts Second Nature Focus Group - Albrena, Astelina, Bethan,Eliza, Jack, Juliet, Rae, Rowen-Lilja, Tintin\nWebsite design and interactive story engine - Near Now nearnow.org.uk\n\nThank you to our partners, Broadway Cinema, Near Now, Unanima, Bulwell Forest Gardens, GrowNotts, the Toy Library for usage of Barkers Wood for filming, NTU Design for Theatre, Film and TV for use of their space for set building and construction, props, and for providing the original base of the set we repurposed.\n\nSupported using public funding by the National Lottery through Arts Council England.`,
+      content: `Created by Mind Out Arts Second Nature Focus Group\nWritten by Martha Reed\nDirected by Evie Osbon\nPerformed by Michelle Kelly\nDigital Artist - Joe Strickland\nDesigner & Puppetry Consultant - Nikki Charlesworth\nDigital Consultant - Paula Varjack & Nathan Penlington\nFreelance Environmental Consultant - Talie Smith\nArtist Wellbeing Practitioner - Nikki Disney\nStrategic Producer - Phoebe Wall-Palmer\nProducer - Evie Osbon\nAssistant Producer - Simrun Sandhu\nAssistant Facilitators - Ruby Mucenieks, Anna Cooke, Octavia Nyombi, Sarah Hailstones\nMind Out Arts Second Nature Focus Group - Albrena, Astelina, Bethan,Eliza, Jack, Juliet, Rae, Rowen-Lilja, Tintin\nWebsite design and interactive story engine - Near Now nearnow.org.uk\n\nThank you to our partners, Broadway Cinema, Near Now, Unanima, Bulwell Forest Gardens, GrowNotts, the Toy Library for usage of Barkers Wood for filming, NTU Design for Theatre, Film and TV for use of their space for set building and construction, props, and for providing the original base of the set we repurposed.\n\nSupported using public funding by the National Lottery through Arts Council England.</br></br><h2>Thank you for watching!</h2></br><em>Scan the QR code below to fill in a feedback form. Please answer honestly as it will help us to develop <i>Second Nature</i> further.</em></br></br>
+	  <img src="https://nearnowstudio.github.io/second-nature/assets/mindouttheatreqr.png" style="width:300px;height:300px;">`,
       choices: []
     }
   }
@@ -840,6 +841,12 @@ const STORY = {
 // ═══════════════════════════════════════════════════
 //  ENGINE
 // ═══════════════════════════════════════════════════
+
+function pauseAllVideos() {
+  chatLog.querySelectorAll('video').forEach(v => {
+    v.pause();
+  });
+}
 
 const chatLog = document.getElementById('chat-log');
 const choicesArea = document.getElementById('choices-area');
@@ -874,12 +881,13 @@ function appendDivider(text) {
 }
 
 function appendVideo(src, label) {
+  pauseAllVideos();
   const wrap = document.createElement('div');
   wrap.innerHTML = `
     <div class="msg msg-narrator">
       <div class="msg-label">// VISUAL RECORD</div>
       <div class="video-wrap">
-        <video controls>
+        <video controls autoplay>
           <source src="${src}" type="video/mp4">
           Your browser does not support video playback.
         </video>
