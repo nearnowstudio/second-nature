@@ -137,9 +137,9 @@ header {
 
 .hud-corner {
   font-family: var(--font-hud);
-  font-size: 0.8rem;
+  font-size: 0.7rem;
   color: var(--text-dim);
-  line-height: 1.8;
+  line-height: 1.6;
   letter-spacing: 0.05em;
 }
 
@@ -159,7 +159,7 @@ header {
 
 .story-title {
   font-family: var(--font-ui);
-  font-size: clamp(2rem, 5vw, 3.4rem);
+  font-size: clamp(2rem, 3.6vw, 2.6rem); /* 2rem, 5vw, 3.4rem */
   font-weight: 600;
   letter-spacing: 0.35em;
   color: var(--toxic);
@@ -221,17 +221,45 @@ header {
 .status-dot.yellow { background: var(--acid); box-shadow: 0 0 6px var(--acid); }
 
 .ticker {
+  flex: 1;
+  min-width: 0;              /* lets it shrink inside the flex row */
+  overflow: hidden;
   margin-left: auto;
   color: var(--text-dim);
   font-size: 0.8rem;
   letter-spacing: 0.08em;
   white-space: nowrap;
-  animation: ticker-scroll 20s linear infinite;
+  /* soft fade at both edges */
+  -webkit-mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+          mask-image: linear-gradient(90deg, transparent, #000 4%, #000 96%, transparent);
+}
+
+.ticker-track {
+  display: inline-flex;
+  width: max-content;
+  animation: ticker-scroll 60s linear infinite;
+  will-change: transform;
+}
+
+.ticker-item {
+  flex-shrink: 0;
+  min-width: 100vw;          /* each copy is at least screen-wide, so no gap on large monitors */
+  padding-right: 2rem;       /* spacing between the end of one copy and the start of the next */
 }
 
 @keyframes ticker-scroll {
-  0% { transform: translateX(300px); }
-  100% { transform: translateX(-800px); }
+  from { transform: translateX(0); }
+  to   { transform: translateX(-50%); }
+}
+
+/* optional: pause on hover */
+.ticker:hover .ticker-track {
+  animation-play-state: paused;
+}
+
+/* slower for users who prefer reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  .ticker-track { animation-duration: 180s; }
 }
 
 /* ── MAIN ── */
@@ -351,6 +379,11 @@ main {
 em {
   color: var(--toxic);
   font-style: italic;
+  font-weight: 300;
+}
+
+a {
+  color: var(--toxic);
   font-weight: 300;
 }
 
@@ -618,28 +651,82 @@ footer {
   position: relative;
   z-index: 10;
   border-top: 1px solid var(--toxic-border);
-  padding: 1.2rem 2.5rem;
+  background: var(--surface);
   display: flex;
+  flex-wrap: wrap;
   justify-content: space-between;
   align-items: center;
-  background: var(--surface);
+  gap: 0.6rem 1.5rem;
+  padding: 1.2rem clamp(1rem, 4vw, 2.5rem);
+  /* keeps content clear of the iPhone home bar and rounded corners */
+  padding-bottom: 1.2rem;
+  padding-left: max(clamp(1rem, 4vw, 2.5rem), env(safe-area-inset-left, 0px));
+  padding-right: max(clamp(1rem, 4vw, 2.5rem), env(safe-area-inset-right, 0px));
+}
+
+.footer-left,
+.footer-right {
+  font-family: var(--font-hud);
+  font-size: clamp(0.62rem, 2.2vw, 0.8rem);
+  letter-spacing: clamp(0.08em, 0.5vw, 0.2em);
+  color: var(--text-dim);
+  line-height: 1.8;
 }
 
 .footer-left {
-  font-family: var(--font-hud);
-  font-size: 0.8rem;
-  letter-spacing: 0.2em;
-  color: var(--text-dim);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0 0.6rem;
+  min-width: 0;
+}
+
+/* dot divider between the two spans, not before the first */
+.footer-left span + span::before {
+  content: '·';
+  margin-right: 0.6rem;
+}
+
+/* links inherit the footer colour and light up on hover */
+.footer-left a {
+  color: inherit;
+  text-decoration: none;
+  border-bottom: 1px solid var(--text-faint);
+  transition: color 0.2s, border-color 0.2s;
+}
+
+.footer-left a:hover,
+.footer-left a:focus-visible {
+  color: var(--toxic);
+  border-color: var(--toxic);
 }
 
 .footer-right {
-  font-family: var(--font-hud);
-  font-size: 0.8rem;
-  letter-spacing: 0.15em;
-  color: var(--text-dim);
   display: flex;
   align-items: center;
   gap: 0.6rem;
+  letter-spacing: clamp(0.06em, 0.4vw, 0.15em);
+}
+
+/* Phones in portrait: stack and centre */
+@media (max-width: 600px) {
+  footer {
+    flex-direction: column;
+    justify-content: center;
+    text-align: center;
+    gap: 0.4rem;
+  }
+  .footer-left {
+    justify-content: center;
+  }
+}
+
+/* Phones in landscape: short screens, so tighten the vertical space */
+@media (max-height: 500px) and (orientation: landscape) {
+  footer {
+    flex-direction: row;
+    padding-top: 0.6rem;
+    padding-bottom: calc(0.6rem + env(safe-area-inset-bottom, 0px));
+  }
 }
 
 /* Glitch effect on title */
@@ -682,6 +769,70 @@ footer {
   94% { opacity: 0.5; transform: translateX(3px); }
   96% { opacity: 0; transform: translateX(-3px); }
 }
+
+/* ── LOGO STRIP ── */
+.logo-strip {
+  position: relative;
+  z-index: 10;
+  background: var(--surface);
+  border-top: 1px solid var(--text-faint);
+  display: flex;
+  flex-wrap: nowrap;                  /* one line on tablets and desktops */
+  justify-content: center;
+  align-items: center;
+  gap: 1.2rem clamp(1rem, 4vw, 3rem);
+  padding: 1.5rem clamp(1rem, 4vw, 2.5rem);
+  padding-bottom: calc(1.5rem + env(safe-area-inset-bottom, 0px));
+  padding-left: max(clamp(1rem, 4vw, 2.5rem), env(safe-area-inset-left, 0px));
+  padding-right: max(clamp(1rem, 4vw, 2.5rem), env(safe-area-inset-right, 0px));
+}
+
+.logo-strip img {
+  display: block;
+  flex: 0 1 auto;                     /* each logo can shrink if the row gets tight */
+  min-width: 0;
+  height: var(--h);                   /* each logo sets its own height below */
+  width: auto;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+/* ── Per-logo heights: change these numbers to fine-tune ── */
+.logo-mindout  { --h: clamp(80px, 8vw, 80px); }
+.logo-lottery  { --h: clamp(52px, 6vw, 52px); }
+.logo-nearnow  { --h: clamp(14px, 2vw, 22px); }
+.logo-broadway { --h: clamp(28px, 3vw, 28px); }
+
+/* Phones in portrait: stack in a centred column */
+@media (max-width: 520px) {
+  .logo-strip {
+    flex-direction: column;
+    gap: 1.2rem;
+  }
+  .logo-mindout  { --h: 80px; }
+  .logo-lottery  { --h: 52px; }
+  .logo-nearnow  { --h: 18px; }
+  .logo-broadway { --h: 28px; }
+  .logo-strip img {
+    max-width: 80%;
+  }
+}
+
+/* Phones in landscape: short screens, so keep logos compact in a row */
+@media (max-height: 500px) and (orientation: landscape) {
+  .logo-strip {
+    flex-direction: row;
+    padding-top: 0.8rem;
+    padding-bottom: calc(0.8rem + env(safe-area-inset-bottom, 0px));
+  }
+  .logo-mindout  { --h: 80px; }
+  .logo-lottery  { --h: 52px; }
+  .logo-nearnow  { --h: 18px; }
+  .logo-broadway { --h: 20px; }
+  .logo-strip img {
+    max-width: 100%;
+  }
+}
 </style>
 </head>
 <body>
@@ -694,7 +845,7 @@ footer {
 <header>
   <div class="hud-corner">
     UNIT_ID: ASH<br>
-    LOC: FOREST<br>
+    LOC: <span style="color:var(--moss)">FOREST</span><br>
     ATMO: <span style="color:var(--rust)">TOXIC</span><br>
     <span class="blink">▮</span> TRANSMITTING
   </div>
@@ -702,19 +853,20 @@ footer {
     <h1 class="story-title" data-text=“SECOND NATURE”>SECOND NATURE</h1>
     <p class="story-subtitle">classified transmission &nbsp;/&nbsp; year 2051</p>
   </div>
+  <!-- /* removed
   <div class="hud-corner" style="text-align:right">
-    O2: <span style="color:var(--acid)">12.4%</span><br>
-    TEMP: +3.8°C<br>
-    SEA LVL: +4.2M<br>
-    <span style="color:var(--text-faint)">ARCHIVE NODE</span>
-  </div>
+  O2: <span class="fluct" data-base="20.9" data-decimals="2" data-suffix="%" style="color:var(--acid)">20.90%</span><br>
+  TEMP: <span class="fluct" data-base="2.0" data-decimals="2" data-prefix="+" data-suffix="°C">+2.00°C</span><br>
+  SEA LVL: <span class="fluct" data-base="16.0" data-decimals="2" data-prefix="+" data-suffix="M">+16.1M</span><br>
+  </div> <-- removed */ -->
 </header>
 
 <div class="status-bar">
-  <!-- // <div class="status-item"><div class="status-dot"></div>NARRATIVE STREAM ACTIVE</div>
-  <div class="status-item"><div class="status-dot yellow"></div>BIOSPHERE: CRITICAL</div>
-  <div class="status-item"><div class="status-dot red"></div>CORP SURVEILLANCE DETECTED</div> // -->
-  <div class="ticker">ALERT: CLEAN WATER SCARCE &nbsp;·&nbsp; DAYS SINCE FLOOD: 4 &nbsp;·&nbsp; MYCELIUM NETWORK STATUS: ONLINE &nbsp;·&nbsp; SEEDS PLANTED: 2.4BN &nbsp;·&nbsp;</div>
+  <div class="ticker">
+    <div class="ticker-track">
+      <span class="ticker-item">ALERT: <span style="color:var(--acid)">CLEAN WATER SCARCE</span> &nbsp;·&nbsp; DAYS SINCE FLOOD: <span style="color:var(--mist)">4</span> &nbsp;·&nbsp; MYCELIUM NETWORK STATUS: <span style="color:var(--acid)">ONLINE</span> &nbsp;·&nbsp; SEEDS PLANTED: <span style="color:var(--algae)">2.4BN</span> &nbsp;·&nbsp; O&#8322;: <span class="fluct" data-base="20.9" data-decimals="2" data-suffix="%" style="color:var(--mist)">20.90%</span> &nbsp;·&nbsp; CO&#8322;: <span class="fluct" data-base="550" data-decimals="0" data-suffix="ppm" style="color:var(--rust)">550</span> &nbsp;·&nbsp; TEMP: <span class="fluct" data-base="2.0" data-decimals="2" data-prefix="+" data-suffix="°C" style="color:var(--rust)">+2.00°C</span> &nbsp;·&nbsp; SEA LVL: <span class="fluct" data-base="16.1" data-decimals="2" data-prefix="+" data-suffix="M" style="color:var(--mist)">+16.1M</span> &nbsp;·&nbsp; </span>
+    </div>
+  </div>
 </div>
 
 <main>
@@ -723,12 +875,22 @@ footer {
 </main>
 
 <footer>
-  <div class="footer-left">SECOND NATURE&#169; MIND OUT THEATRE 2026 &nbsp;·&nbsp; WEBSITE &amp; STORY ENGINE&#169; LICENSED BY NEAR NOW 2026</div>
+  <div class="footer-left">
+    <span><a href="https://www.mindouttheatre.com/second-nature">MIND OUT ARTS CIC</a> &#169;2026</span>
+    <span>DESIGN BY <a href="https://www.nearnow.org.uk">NEAR NOW</a></span>
+  </div>
   <div class="footer-right">
     <div class="status-dot" style="width:4px;height:4px"></div>
     YOUR CHOICES SHAPE THE OUTCOME
   </div>
 </footer>
+
+<div class="logo-strip">
+  <img class="logo-mindout" src="https://nearnowstudio.github.io/second-nature/assets/mindouttheatrelogo.png" alt="Mind Out Arts CIC" loading="lazy">
+  <img class="logo-nearnow" src="https://nearnowstudio.github.io/second-nature/assets/1272_Near_Now_Plain_Logotypewhite_screen.png" alt="Near Now" loading="lazy">
+  <img class="logo-broadway" src="https://nearnowstudio.github.io/second-nature/assets/Blogo_Arts_white.png" alt="Broadway" loading="lazy">
+  <img class="logo-lottery" src="https://nearnowstudio.github.io/second-nature/assets/National%20Lottery%20%20ACE%20logo.png" alt="Supported by National Lottery through Arts Council England" loading="lazy">
+</div>
 
 <script>
 // ═══════════════════════════════════════════════════
@@ -742,7 +904,7 @@ const STORY = {
 
     intro: {
       type: "text",
-      content: `You are about to experience an interactive film project called <em>SECOND NATURE</em>.\n\nThe different narrative pathways have been created by a group of 10 young people from Nottinghamshire, and written by Martha Reed. This is a work-in-progress, sharing the story set up and the first few minutes of content.\n\nWhen you are prompted to make a decision for the character, please choose one of the options that appear.\n\nMaking these experiences rely on funding and support. Your feedback at this stage will help us in securing the next phase of development. <em>Please complete the form by scanning the QR code at the end of the experience.</em>`,
+      content: `You are about to experience <em>SECOND NATURE</em> — an interactive film project by Mind Out Theatre.\n\nThe different narrative pathways have been created by a group of 10 young people from Nottinghamshire, and written by Martha Reed. This is a work-in-progress, sharing the story set up and the first few minutes of content.\n\nWhen you are prompted to make a decision for the character, please choose one of the options that appear.\n\nMaking these experiences rely on funding and support. Your feedback at this stage will help us in securing the next phase of development. <em>Please complete the form by scanning the QR code at the end of the experience.</em>`,
       choices: [
         { label: "Start", next: "prologue" }
       ]
@@ -831,7 +993,7 @@ const STORY = {
 
 	credits: {
       type: "text",
-      content: `Created by Mind Out Arts Second Nature Focus Group\nWritten by Martha Reed\nDirected by Evie Osbon\nPerformed by Michelle Kelly\nDigital Artist - Joe Strickland\nDesigner & Puppetry Consultant - Nikki Charlesworth\nDigital Consultant - Paula Varjack & Nathan Penlington\nFreelance Environmental Consultant - Talie Smith\nArtist Wellbeing Practitioner - Nikki Disney\nStrategic Producer - Phoebe Wall-Palmer\nProducer - Evie Osbon\nAssistant Producer - Simrun Sandhu\nAssistant Facilitators - Ruby Mucenieks, Anna Cooke, Octavia Nyombi, Sarah Hailstones\nMind Out Arts Second Nature Focus Group - Albrena, Astelina, Bethan, Eliza, Jack, Juliet, Rae, Rowen-Lilja, Tintin\nWebsite &amp; interactive story engine design - Near Now nearnow.org.uk\n\nThank you to our partners, Broadway Cinema, Near Now, Unanima, Bulwell Forest Gardens, GrowNotts, the Toy Library for usage of Barkers Wood for filming, NTU Design for Theatre, Film and TV for use of their space for set building and construction, props, and for providing the original base of the set we repurposed.\n\nSupported using public funding by the National Lottery through Arts Council England.\n\n<h2><em>Thank you for watching!</em></h2>\n<em>Scan the QR code below to fill in a feedback form. Please answer honestly as it will help us to develop <i>Second Nature</i> further.</em>\n
+      content: `Created by Mind Out Arts' <em>Second Nature</em> Focus Group\nWritten by Martha Reed\nDirected by Evie Osbon\nPerformed by Michelle Kelly\nDigital Artist: Joe Strickland\nDesigner & Puppetry Consultant: Nikki Charlesworth\nDigital Consultant: Paula Varjack & Nathan Penlington\nFreelance Environmental Consultant: Talie Smith\nArtist Wellbeing Practitioner: Nikki Disney\nStrategic Producer: Phoebe Wall-Palmer\nProducer: Evie Osbon\nAssistant Producer: Simrun Sandhu\nAssistant Facilitators: Ruby Mucenieks, Anna Cooke, Octavia Nyombi, Sarah Hailstones\nSecond Nature Focus Group: Albrena, Astelina, Bethan, Eliza, Jack, Juliet, Rae, Rowen-Lilja, Tintin\nWebsite &amp; interactive story engine design: Near Now \n\nThank you to our partners: Broadway Cinema, Near Now, Unanima, Bulwell Forest Gardens, GrowNotts, the Toy Library for usage of Barkers Wood for filming, NTU Design for Theatre, Film and Television for use of their space for set building and construction, props, and for providing the original base of the set we repurposed.\n\n<img src="https://nearnowstudio.github.io/second-nature/assets/National%20Lottery%20%20ACE%20logo.png" style="width:250px;height:69px;">\n\n<h2><em>Thank you for watching!</em></h2>\n<em>Scan the QR code below to fill in a feedback form. Please answer honestly as it will help us to develop <i>Second Nature</i> further.</em>\n
 	  <img src="https://nearnowstudio.github.io/second-nature/assets/mindouttheatreqr.png" style="width:300px;height:300px;">`,
       choices: []
     }
@@ -993,6 +1155,44 @@ async function init() {
 }
 
 init();
+
+function startHudFluctuation() {
+  const MIN_PCT = 0.1;
+  const MAX_PCT = 0.3;
+
+  function decimalsFor(base) {
+    const smallestChange = base * (MIN_PCT / 100);
+    return Math.max(0, Math.ceil(-Math.log10(smallestChange)));
+  }
+
+  function update() {
+    document.querySelectorAll('.fluct').forEach(el => {
+      const base = parseFloat(el.dataset.base);
+      const decimals = el.dataset.decimals !== undefined
+        ? parseInt(el.dataset.decimals, 10)
+        : decimalsFor(base);
+      const pct = MIN_PCT + Math.random() * (MAX_PCT - MIN_PCT);
+      const direction = Math.random() < 0.5 ? -1 : 1;
+      const value = base * (1 + (direction * pct) / 100);
+      el.textContent = (el.dataset.prefix || '') + value.toFixed(decimals) + (el.dataset.suffix || '');
+    });
+  }
+
+  update();
+  setInterval(update, 1500);
+}
+
+function setupTicker() {
+  const track = document.querySelector('.ticker-track');
+  const item = track.querySelector('.ticker-item');
+  const clone = item.cloneNode(true);
+  clone.setAttribute('aria-hidden', 'true');   // hide the duplicate from screen readers
+  track.appendChild(clone);
+}
+
+setupTicker();            // must run first, so the clone exists
+startHudFluctuation();    // then the numbers (header and both ticker copies) start moving
+
 </script>
 </body>
 </html>
